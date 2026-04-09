@@ -1,8 +1,8 @@
 export type PricingRow = {
-  difficulty: string
-  price: string
-  example: string
-}
+  difficulty: string;
+  price: string;
+  example: string;
+};
 
 export const pricingData: PricingRow[] = [
   {
@@ -16,7 +16,7 @@ export const pricingData: PricingRow[] = [
     example: "UI 일부 수정, 필드 노출 변경, 입력값 검증 추가",
   },
   {
-    difficulty: "하중",
+    difficulty: "중하",
     price: "90,000",
     example: "단순 API 수정, 쿼리 조건 일부 변경, 신규 컬럼 추가(단순 조회)",
   },
@@ -41,4 +41,4 @@ export const pricingData: PricingRow[] = [
     example:
       "핵심 로직 재설계, 대규모 리팩터링 — 기준가 2,200,000원 (분석 후 범위 확정 필요)",
   },
-]
+];
