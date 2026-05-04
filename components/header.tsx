@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
+import { usePathname, useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 import { navLinks } from "@/constants/navigation"
@@ -9,6 +10,17 @@ import { navLinks } from "@/constants/navigation"
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const pathname = usePathname()
+  const router = useRouter()
+
+  const handleContactClick = () => {
+    setIsMobileMenuOpen(false)
+    if (pathname === "/") {
+      document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })
+    } else {
+      router.push("/#contact")
+    }
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -48,9 +60,7 @@ export function Header() {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Button asChild>
-              <Link href="/#contact">문의하기</Link>
-            </Button>
+            <Button onClick={handleContactClick}>문의하기</Button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -79,10 +89,8 @@ export function Header() {
                 {link.name}
               </Link>
             ))}
-            <Button asChild className="w-fit mt-1">
-              <Link href="/#contact" onClick={() => setIsMobileMenuOpen(false)}>
-                문의하기
-              </Link>
+            <Button className="w-fit mt-1" onClick={handleContactClick}>
+              문의하기
             </Button>
           </nav>
         </div>
