@@ -24,9 +24,12 @@ const difficultyStyle: Record<string, string> = {
 
 const principles = [
   <>
-    최종 금액은{" "}
+    <strong className="font-semibold text-foreground">최하·하·중하</strong>는{" "}
+    <strong className="font-semibold text-foreground">건당 단가</strong>로
+    산정합니다.{" "}
+    <strong className="font-semibold text-foreground">중 이상</strong>은{" "}
     <strong className="font-semibold text-foreground">
-      난이도별 기준 단가 × 예상일수(0.5D 단위)
+      기준 단가 × 예상일수(0.5D 단위)
     </strong>
     로 산정합니다. 1D = 1인 1일(8시간) 기준입니다.
   </>,
@@ -149,11 +152,8 @@ export default function PricingPage() {
                   난이도별 기준 단가
                 </h2>
                 <p className="text-sm text-muted-foreground mt-0.5">
-                  기술적 수준에 따른 기준 단가이며, 실제 비용은{" "}
-                  <strong className="font-semibold text-foreground">
-                    단가 × 예상일수
-                  </strong>
-                  로 산정됩니다.
+                  최하·하·중하는 <strong className="font-semibold text-foreground">건당</strong>, 중 이상은{" "}
+                  <strong className="font-semibold text-foreground">일당 × 예상일수</strong>로 산정됩니다.
                 </p>
               </div>
             </div>
@@ -165,6 +165,9 @@ export default function PricingPage() {
                       <TableRow className="bg-muted/50">
                         <TableHead className="w-24 font-semibold">
                           난이도
+                        </TableHead>
+                        <TableHead className="w-28 font-semibold">
+                          기준
                         </TableHead>
                         <TableHead className="w-36 font-semibold">
                           기준 금액
@@ -186,6 +189,23 @@ export default function PricingPage() {
                             >
                               {row.difficulty}
                             </span>
+                          </TableCell>
+                          <TableCell>
+                            {row.basis === "건당" && (
+                              <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-blue-100 text-blue-700">
+                                건당
+                              </span>
+                            )}
+                            {row.basis === "일당" && (
+                              <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-purple-100 text-purple-700">
+                                일당
+                              </span>
+                            )}
+                            {row.basis === "협의" && (
+                              <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-muted text-muted-foreground">
+                                협의
+                              </span>
+                            )}
                           </TableCell>
                           <TableCell>
                             {row.price === "별도 협의" ? (
@@ -218,11 +238,9 @@ export default function PricingPage() {
                 <Info className="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0" />
                 <div className="text-sm text-blue-700 space-y-1.5 leading-relaxed">
                   <p>
-                    실제 견적은{" "}
-                    <strong className="font-semibold">
-                      기준 단가 × 예상 공수(0.5D 단위)
-                    </strong>
-                    로 산정됩니다.
+                    <strong className="font-semibold">최하·하·중하</strong>는 건당 단가로 청구되며,{" "}
+                    <strong className="font-semibold">중 이상</strong>은{" "}
+                    <strong className="font-semibold">기준 단가 × 예상 공수(0.5D 단위)</strong>로 산정됩니다.
                   </p>
                   <p>
                     단기간 내 집중 요청이나 긴급 대응이 필요한 경우{" "}
